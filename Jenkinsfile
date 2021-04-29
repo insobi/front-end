@@ -18,7 +18,7 @@ node {
         kubernetesDeploy(
             configs: 'complete-demo.yaml',
             kubeconfigId: 'K8S_CLUSTER',
-            // enableConfigSubsitution: true   
+            enableConfigSubsitution: true   
         )
     }
 }
