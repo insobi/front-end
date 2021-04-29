@@ -4,6 +4,13 @@ node {
      }
 
      stage('Build image') {
-         app = docker.build("insobi/front-end:0.3.12.2")
+         app = docker.build("insobi/front-end")
+     }
+
+     stage('Push image') {
+         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+             app.push("${env.BUILD_NUMBER}")
+             app.push("latest")
+         }
      }
 }
