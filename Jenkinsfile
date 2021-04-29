@@ -14,13 +14,10 @@ node {
          }
      }
 
-    stage('Run kubectl') {
-        container('kubectl') {
-            sh "kubectl apply -f ./complete-demo.yaml"
-        }
+    stage('Deploy Apps to K8S Cluster') {
+        kubernetesDeploy(
+            configs: 'complete-demo.yaml',
+            kubeconfigId: 'K8S_CLUSTER',
+        )
     }
-
-
-
-
 }
