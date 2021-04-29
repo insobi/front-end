@@ -14,6 +14,15 @@ node {
          }
      }
 
+    stage('test') {
+        withKubeConfig([
+            credentialsId: 'K8S_CLUSTER',
+            serverUrl: 'https://refreshday-demo-dns-8851db91.hcp.koreacentral.azmk8s.io:443'
+        ]) {
+            sh 'kubectl -n sock-shop delete deployment.apps/front-end'
+        }
+    }
+
     stage('운영환경에 컨테이너 배포') {
         kubernetesDeploy(
             configs: 'complete-demo.yaml',
