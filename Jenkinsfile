@@ -9,8 +9,9 @@ node {
 
      stage('이미지 저장소에 이미지 업로드') {
          docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-             app.push("0.3.12.${env.BUILD_NUMBER}")
-             app.push("latest")
+            //  app.push("0.3.12.${env.BUILD_NUMBER}")
+            app.push("0.3.12.23")
+            app.push("latest")
          }
      }
 
