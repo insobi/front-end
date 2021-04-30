@@ -10,7 +10,7 @@ node {
      stage('__ 빌드 단계 __ 컨테이너 저장소 전달') {
          docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
             //  app.push("0.3.12.${env.BUILD_NUMBER}")
-            app.push("0.3.12.31")
+            app.push("0.3.12.32")
             app.push("latest")
          }
      }
