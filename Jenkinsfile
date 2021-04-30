@@ -1,30 +1,21 @@
 node {
-     stage('소스 다운로드') {
+     stage('Stage #1\n소스 체크') {
          checkout scm
      }
 
-     stage('소스빌드 및 컨테이너 이미지 생성') {
+     stage('Stage #2\n소스 빌드') {
          app = docker.build("insobi/front-end")
      }
 
-     stage('이미지 저장소에 이미지 업로드') {
+     stage('Stage #3\n빌드 이미지 생성') {
          docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
             //  app.push("0.3.12.${env.BUILD_NUMBER}")
-            app.push("0.3.12.24")
+            app.push("0.3.12.25")
             app.push("latest")
          }
      }
 
-    // stage('test') {
-    //     withKubeConfig([
-    //         credentialsId: 'K8S_CLUSTER',
-    //         serverUrl: 'https://refreshday-demo-dns-8851db91.hcp.koreacentral.azmk8s.io:443'
-    //     ]) {
-    //         sh 'kubectl -n sock-shop delete deployment.apps/front-end'
-    //     }
-    // }
-
-    stage('운영환경에 컨테이너 배포') {
+    stage('Stage #4\n운영환경 배포') {
         kubernetesDeploy(
             configs: 'complete-demo.yaml',
             kubeconfigId: 'K8S_CLUSTER',
