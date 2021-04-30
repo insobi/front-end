@@ -233,7 +233,7 @@ spec:
     spec:
       containers:
       - name: front-end
-        image: insobi/front-end:0.3.12.25
+        image: insobi/front-end:0.3.12.26
         resources:
           requests:
             cpu: 100m
